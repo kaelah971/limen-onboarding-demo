@@ -1,0 +1,24 @@
+name: Limen
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  limen:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Evaluate release evidence
+        uses: kaelah971/limen@75ce075951aca1668cdb423f8ae954d39007e527
+        with:
+          github-token: ${{ github.token }}
+          telegraph-private-key: ${{ secrets.LIMEN_TELEGRAPH_PRIVATE_KEY }}
+          telegraph-engine-url: ${{ vars.TELEGRAPH_ENGINE_URL }}
+          limen-api-url: https://limen-production-7af9.up.railway.app
